@@ -1,4 +1,4 @@
-"""Add interview_summary to job_applications
+"""Add interview_summery to job_applications
 
 Revision ID: a2cf6205d3d5
 Revises: 
@@ -31,7 +31,7 @@ def upgrade() -> None:
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
     op.create_index(op.f('ix_users_id'), 'users', ['id'], unique=False)
     op.create_index(op.f('ix_users_username'), 'users', ['username'], unique=True)
-    op.add_column('job_applications', sa.Column('interview_summary', sa.String(), nullable=True))
+    op.add_column('job_applications', sa.Column('interview_summery', sa.String(), nullable=True))
     op.add_column('job_applications', sa.Column('created_at', sa.DateTime(), nullable=True))
     op.add_column('job_applications', sa.Column('updated_at', sa.DateTime(), nullable=True))
     op.add_column('job_applications', sa.Column('user_id', sa.Integer(), nullable=True))
@@ -46,7 +46,7 @@ def downgrade() -> None:
     op.drop_column('job_applications', 'user_id')
     op.drop_column('job_applications', 'updated_at')
     op.drop_column('job_applications', 'created_at')
-    op.drop_column('job_applications', 'interview_summary')
+    op.drop_column('job_applications', 'interview_summery')
     op.drop_index(op.f('ix_users_username'), table_name='users')
     op.drop_index(op.f('ix_users_id'), table_name='users')
     op.drop_index(op.f('ix_users_email'), table_name='users')

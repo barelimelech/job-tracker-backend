@@ -11,7 +11,7 @@ class JobApplication(Base):
     position = Column(String)
     status = Column(String, default="sent")
     application_date = Column(DateTime, default=datetime.now(timezone.utc))
-    interview_summary = Column(String, nullable=True)
+    interview_summery = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

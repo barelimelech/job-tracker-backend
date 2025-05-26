@@ -6,7 +6,7 @@ class JobApplicationBase(BaseModel):
     company_name: str
     position: str
     status: Optional[str] = "applied"
-    interview_summary: Optional[str] = None
+    interview_summery: Optional[str] = None
 
 class JobApplicationCreate(JobApplicationBase):
     pass
