@@ -13,7 +13,7 @@ class JobApplication(Base):
     application_date = Column(DateTime, default=datetime.now(timezone.utc))
     interview_summery = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
 
 
     user_id = Column(Integer, ForeignKey("users.id"))

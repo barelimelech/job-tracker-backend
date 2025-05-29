@@ -1,18 +1,15 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from . import models, schemas, crud
-from .database import SessionLocal, engine, Base
-
-Base.metadata.create_all(bind=engine)
+from .database import SessionLocal, engine, Base, get_db
+from .routes import users
 
 app = FastAPI()
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+models.Base.metadata.create_all(bind=engine)
+print("db created")
+
+app.include_router(users.router)
 
 @app.post("/jobs/", response_model=schemas.JobApplication)
 def create_job(job: schemas.JobApplicationCreate, db: Session = Depends(get_db)):

@@ -1,12 +1,11 @@
 import pytest
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime, timezone
 
 from app.database import Base
 from app.models import JobApplication
 from app.schemas import JobApplicationCreate
-from app.main import get_db 
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 
@@ -17,6 +16,9 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 @pytest.fixture(scope="function")
 def db_session():
     Base.metadata.create_all(bind=engine)
+    inspector = inspect(engine)
+    print("Tables in db_session fixture:", inspector.get_table_names())
+
     db = TestingSessionLocal()
     try:
         yield db
